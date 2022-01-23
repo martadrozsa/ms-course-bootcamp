@@ -4,6 +4,8 @@ import com.martadrozsa.hrpayroll.entities.Payment;
 import com.martadrozsa.hrpayroll.services.PaymentService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/payments")
 @AllArgsConstructor
+@NoArgsConstructor
 public class PaymentResource {
 
+    @Autowired
     private PaymentService paymentService;
 
     @HystrixCommand(fallbackMethod = "getPaymentAlternative")
