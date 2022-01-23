@@ -2,13 +2,11 @@ package com.martadrozsa.hrworker.resources;
 
 import com.martadrozsa.hrworker.entities.Worker;
 import com.martadrozsa.hrworker.repositories.WorkerRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RefreshScope
 @RestController
 @RequestMapping("/workers")
-@AllArgsConstructor
-@NoArgsConstructor
 public class WorkerResource {
 
-    private static Logger logger = LoggerFactory.getLogger(WorkerResource.class);
+    private static final Logger logger = LoggerFactory.getLogger(WorkerResource.class);
 
     @Value("${test.config}")
     private String testConfig;
@@ -34,6 +31,15 @@ public class WorkerResource {
 
     @Autowired
     private WorkerRepository workerRepository;
+
+    public WorkerResource() {
+    }
+
+    public WorkerResource(String testConfig, Environment environment, WorkerRepository workerRepository) {
+        this.testConfig = testConfig;
+        this.environment = environment;
+        this.workerRepository = workerRepository;
+    }
 
     @GetMapping(value = "/configs")
     public ResponseEntity<Void> getConfigs() {
