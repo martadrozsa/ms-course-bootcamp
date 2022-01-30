@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class AppConfig {
 
-    //impleta o padrão de projeto singleton para ter a disposição um objeto restTemplate para injetar em outros serviços
+    //implementa o padrão de projeto singleton para ter a disposição um objeto restTemplate para injetar em outros serviços
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();

@@ -3,11 +3,9 @@ package com.martadrozsa.hrpayroll.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
 @AllArgsConstructor
-public class Payment implements Serializable {
+public class Payment {
 
     private String name;
     private Double dailyIncome;
